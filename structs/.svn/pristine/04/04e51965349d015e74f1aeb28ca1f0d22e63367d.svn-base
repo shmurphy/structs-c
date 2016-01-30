@@ -1,0 +1,64 @@
+/*
+ * hw4.c
+ *
+ *  Created on: Apr 27, 2015
+ *      Author: Shannon Murphy
+ */
+
+#include <stdio.h>
+#include <string.h>
+
+struct item_tag {
+	char name[20];
+	int quantity;
+	char price[20];
+
+};
+
+typedef struct item_tag Item;
+
+struct customer_tag {
+	char name[29];
+	Item items[20];
+};
+
+typedef struct customer_tag Customer;
+
+int main(void) {
+    FILE *infile;
+    int i;
+
+    Customer customerArr[20];
+    Customer c;
+    Item itemArr[20];
+    Item item;
+    int arrCount = 0;
+
+    setvbuf(stdout, NULL, _IONBF, 0);
+    infile = fopen("hw4input.txt", "r");
+
+    if (infile == NULL) {
+    	printf("File did not open.");
+    	return 1;
+    }
+
+    // put all data into customerArr
+    while (fscanf(infile, "%s %d %s %s", c.name, &item.quantity, item.name, item.price) != EOF) {
+    	itemArr[arrCount] = item;
+    	c.items[arrCount] = itemArr[arrCount];
+        customerArr[arrCount] = c;
+        arrCount++;
+    }
+
+    // print out all the data from the array
+    for (i = 0; i < arrCount; i++) {
+        printf("%s %d %s %s\n", customerArr[i].name, customerArr[i].items[i].quantity,
+        		customerArr[i].items[i].name, customerArr[i].items[i].price);
+    }
+
+    fclose(infile);
+
+    return 0;
+}
+
+
